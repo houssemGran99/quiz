@@ -96,3 +96,15 @@ border-radius: 40%;
 
 }
 
+
+.option.correct {
+    background-color: #28a745;
+    color: white;
+    border: 2px solid #1e7e34;
+}
+
+.option.incorrect {
+    background-color: #dc3545;
+    color: white;
+    border: 2px solid #bd2130;
+}
