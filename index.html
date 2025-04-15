@@ -1,42 +1,51 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz Game for Kids</title>
-  <link rel="stylesheet" href="/style.css">
+  <title>Image Redirect Page</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      gap: 30px;
+      background-color: #f5f5f5;
+    }
+    .row {
+      display: flex;
+      gap: 50px;
+    }
+    img {
+      width: 500px;
+      height: auto;
+      cursor: pointer;
+      border-radius: 8px;
+      transition: transform 0.3s ease;
+    }
+    img:hover {
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
-
-  <audio id="backgroundMusic" autoplay loop>
-    <source src="/Kids Game — Childrens Music (Instrumental Music For Kids).mp3" type="audio/mp3">
-    Your browser does not support the audio element.
-  </audio>
-  
-  <img src="/Transparent PNG/04_jump/skeleton-04_jump_00.png" width="15%" id="hero">
-
-
-  <div class="hexagon-container">
-    <div id="q-1" class="hexagon">1 السؤال</div>
-    <div id="q-2" class="hexagon">2 السؤال</div>
-    <div id="q-3" class="hexagon">3 السؤال</div>
-    <div id="lesson" class="hexagon">العبرة</div>
+  <div class="row">
+    <a href="game1.html" target="_blank">
+      <img src="jeux1.png" alt="Image 1">
+    </a>
+    <a href="game2.html" target="_blank">
+      <img src="jeux2.png" alt="Image 2">
+    </a>
   </div>
-
-
-  <div id="popup-overlay"></div>
-  <div id="popup">
-    <p id="question"></p>
-    <button type="button" id="closePopupButton">التالي</button>
+  <div class="row">
+    <a href="http://vps-d19efc6b.vps.ovh.net:3000/questions" target="_blank">
+      <img src="jeux1bo.png" alt="Image 3">
+    </a>
+    <a href="http://vps-d19efc6b.vps.ovh.net:3000/questions" target="_blank">
+      <img src="jeux1bo.png" alt="Image 4">
+    </a>
   </div>
-
-  
-
-
-<script src="script.js"></script>
-
-  
-  
 </body>
 </html>
