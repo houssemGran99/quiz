@@ -1,105 +1,54 @@
+document.addEventListener('DOMContentLoaded', () => {
+  // Select all hexagons and popup elements
+  const hexagons = document.querySelectorAll('.hexagon');
+  const popup = document.getElementById('popup');
+  const popupOverlay = document.getElementById('popup-overlay');
+  const closePopupButton = document.getElementById('closePopupButton');
+  const questionText = document.getElementById('question');
+
+  // Sample questions for each hexagon (you can customize these)
+  const questions = {
+    'q-1': 'ما هو لون السماء في يوم مشمس؟',
+    'q-2': 'ما هو 2 + 2؟',
+    'q-3': 'ما هو الحيوان الذي يعيش في البحر وله ثمانية أذرع؟',
+    'lesson': 'العبرة: التعلم ممتع ومليء بالمفاجآت!'
+  };
+
+  // Add click event listener to each hexagon
+  hexagons.forEach(hexagon => {
+    hexagon.addEventListener('click', () => {
+      // Set the question text based on the hexagon's ID
+      questionText.textContent = questions[hexagon.id] || 'لا يوجد سؤال متاح';
+      // Show popup and overlay
+      popup.style.display = 'block';
+      popupOverlay.style.display = 'block';
+    });
+  });
+
+  // Close popup when the close button is clicked
+  closePopupButton.addEventListener('click', () => {
+    popup.style.display = 'none';
+    popupOverlay.style.display = 'none';
+  });
+
+  // Close popup when clicking outside the popup (on the overlay)
+  popupOverlay.addEventListener('click', () => {
+    popup.style.display = 'none';
+    popupOverlay.style.display = 'none';
+  });
+});
 
 
-let questions = ["السؤال الأول : أذكر الشخصيات الرئيسية في النص",
-  "السؤال الثاني : ما هو الموضوع الرئيسي للنص؟",
-  "السؤال الثالث : ما هي الفكرة الفرعية التي يدور حولها النص؟",
-  "العبرة من النص هي أن نتجنب قول أي شيء إلا إذا كان حقيقياً"
-];
+document.querySelectorAll('.hexagon').forEach(hex => {
+  hex.addEventListener('click', () => {
+    document.getElementById('popup-overlay').style.display = 'block';
+    const popup = document.getElementById('popup');
+    popup.classList.add('show');
+  });
+});
 
-let hero = document.getElementById("hero")
-let closePopupButton = document.querySelector("#closePopupButton");
-
-closePopupButton.addEventListener("click", closePopup);
-
-let index = 0;
-let position = 0;
-let game = true;
-let level = 0
-
-let jumpIndex = 0;
-
-bgMusic = document.getElementById("backgroundMusic")
-
-bgMusic.play();
-
-
-let gameIntervale = setInterval(startGame, 60); 
-
-function startGame(){
-
-
-  if(game){
- 
-    bgMusic.play()
-    console.log("game started");
-  
-
-  if(index >= 13){
-    index = 0
-  }
-  
-    if(position != 150 && position != 650 && position != 1150 && position != 1660){
-      runHero();
-      moveHeroForward();
-    
-  }else {
-    
-    bgMusic.pause()
-    showPopup();
-    pause();
-    level++
-} 
-
-
-if (position >= 1800) {
-  clearInterval(gameIntervale);
-  console.log("Game interval cleared");
-}
-
-  index++
-  }
-}
-
-function runHero(){
-  if(index < 10){
-    hero.setAttribute("src","/Transparent PNG/03_run/skeleton-03_run_0"+index+".png")
-  }
-  else{
-    hero.setAttribute("src","/Transparent PNG/03_run/skeleton-03_run_"+index+".png")
-  } 
-}
-
-function jumpHero(){
-  hero.setAttribute("src","/Transparent PNG/04_jump/skeleton-04_jump_0"+jumpIndex+".png")
-  jumpIndex++
-}
-
-
-function moveHeroForward() {
-    position += 10; // Move 10px forward
-    hero.style.left = position + "px"; // Update the 'left' style
-    console.log(position);
-}
-
-function pause(){
-  clearInterval(gameIntervale);
-}
-
-
-function showPopup() {
-  document.getElementById("popup").style.display = "block";
-  document.getElementById("popup-overlay").style.display = "block";
-  document.getElementById("question").innerHTML = questions[level]
-  console.log("show popup")
-}
-
-function closePopup() {
-  document.getElementById("popup").style.display = "none"
-  document.getElementById("popup-overlay").style.display = "none"
-  console.log("close popup");
-  position+=10
-  gameIntervale = setInterval(startGame, 60);
-  
-}
-
-
+document.getElementById('closePopupButton').addEventListener('click', () => {
+  document.getElementById('popup-overlay').style.display = 'none';
+  const popup = document.getElementById('popup');
+  popup.classList.remove('show');
+});
