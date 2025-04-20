@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,30 +7,29 @@
   <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-
   
+  <div id="loading" class="text-center mt-5" style="display: none;">
+    <p>جاري تحميل الأسئلة...</p>
+  </div>
   
-
-  <div class="hexagon-container">
-    <div id="q-1" class="hexagon">1 السؤال</div>
-    <div id="q-2" class="hexagon">2 السؤال</div>
-    <div id="q-3" class="hexagon">3 السؤال</div>
-    <div id="lesson" class="hexagon">العبرة</div>
+  <div id="error" class="text-center mt-5 text-danger" style="display: none;">
+    <p>حدث خطأ أثناء تحميل الأسئلة. يرجى المحاولة لاحقًا.</p>
   </div>
 
+
+  <div class="hexagon-container" id="hexagon-container">
+    <div id="q-1" class="hexagon">السؤال 1</div>
+    <div id="q-2" class="hexagon">السؤال 2</div>
+    <div id="q-3" class="hexagon">السؤال 3</div>
+    <div id="lesson" class="hexagon">العبرة</div>
+  </div>
 
   <div id="popup-overlay"></div>
   <div id="popup">
     <p id="question"></p>
-    <button type="button" id="closePopupButton">التالي</button> 
+    <button type="button" id="closePopupButton">التالي</button>
   </div>
 
-  
-
-
-<script src="script.js"></script>
-
-  
-  
+  <script src="/script.js"></script>
 </body>
 </html>
