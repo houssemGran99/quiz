@@ -7,14 +7,14 @@
   <link rel="stylesheet" href="styles.css">
   <style>
     .option { cursor: pointer; }
+    .question-box { display: none; }
+    .question-box.active { display: block; }
   </style>
 </head>
 <body>
   <div class="container" id="quiz-container">
     <h1>الأسئلة التفاعلية</h1>
-
     <img src="cat.jpg">
-
   </div>
 
   <script>
@@ -25,6 +25,9 @@
         .then(data => {
           const quizContainer = document.getElementById("quiz-container");
           console.log("Loaded questions:", data);
+
+          // Store all question boxes
+          const questionBoxes = [];
 
           data.forEach((q, questionIndex) => {
             const box = document.createElement("div");
@@ -62,6 +65,41 @@
 
             box.appendChild(options);
             quizContainer.appendChild(box);
+            questionBoxes.push(box);
+          });
+
+          // Show the first question box
+          let currentQuestionIndex = 0;
+          if (questionBoxes.length > 0) {
+            questionBoxes[0].classList.add("active");
+          }
+
+          // Handle Enter key press
+          document.addEventListener("keydown", (event) => {
+            if (event.key === "Enter") {
+              // Check if an option has been selected
+              const currentBox = questionBoxes[currentQuestionIndex];
+              const selectedOption = currentBox.querySelector(".option.correct, .option.incorrect");
+              if (!selectedOption) {
+                alert("يرجى اختيار إجابة قبل المتابعة!");
+                return;
+              }
+
+              // Hide current question and show the next one
+              currentBox.classList.remove("active");
+              currentQuestionIndex++;
+
+              if (currentQuestionIndex < questionBoxes.length) {
+                questionBoxes[currentQuestionIndex].classList.add("active");
+              } else {
+                // Optionally, show a completion message
+                const completionMessage = document.createElement("div");
+                completionMessage.textContent = "لقد أكملت جميع الأسئلة!";
+                completionMessage.style.fontSize = "24px";
+                completionMessage.style.marginTop = "20px";
+                quizContainer.appendChild(completionMessage);
+              }
+            }
           });
         })
         .catch(error => {
@@ -69,5 +107,6 @@
         });
     });
   </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'933bd411afd6b029',t:'MTc0NTIyNzQ2Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script>
 </body>
 </html>
